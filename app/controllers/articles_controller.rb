@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  #A frequent practice is to place the standard CRUD actions in each controller in the following order: index, show, new, edit, create, update and destroy
   def index
     @articles = Article.all
   end
@@ -15,17 +16,6 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def update
-    @article = Article.find(params[:id])
-
-    if @article.update(article_params)
-      #redirect to the article show page.  get article
-      redirect_to @article
-    else
-      render 'edit'
-    end
-  end
-
   def create
     #render plain: params[:article].inspect
     #@article = params[:article][:title]
@@ -38,6 +28,17 @@ class ArticlesController < ApplicationController
       redirect_to @article
     else
       render 'new'
+    end
+  end
+
+  def update
+    @article = Article.find(params[:id])
+
+    if @article.update(article_params)
+      #redirect to the article show page.  get article
+      redirect_to @article
+    else
+      render 'edit'
     end
   end
 
